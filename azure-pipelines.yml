@@ -16,5 +16,5 @@ steps:
   displayName: 'NuGet push'
   inputs:
     command: push
-    publishVstsFeed: '<projectName>/<feed>'
+    publishVstsFeed: 'Yolov8.net/samuelstainback'
     allowPackageConflicts: true
