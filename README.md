@@ -62,7 +62,6 @@ foreach (var pred in predictions)
 }
 ```
 
-```
 ![](result.jpg)
 # References
 
