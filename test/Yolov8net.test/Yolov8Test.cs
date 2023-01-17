@@ -1,5 +1,6 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace Yolov8net.test
 {
@@ -28,14 +29,30 @@ namespace Yolov8net.test
             using var yolo = new Yolov8("./assets/yolov8m.onnx");
             Assert.NotNull(yolo);
 
-            using var image = Image.FromFile("Assets/rufus.jpg");
+            using var image = Image.FromFile("Assets/input.jpg");
             var predictions = yolo.Predict(image);
 
             Assert.NotNull(predictions);
 
             DrawBoxes(yolo.ModelInputHeight, yolo.ModelInputWidth, image, predictions);
 
-            image.Save("rufus-out.jpg");
+            image.Save("result.jpg");
+        }
+
+        [Fact]
+        public void CocoTest_CUDA()
+        {
+            using var yolo = new Yolov8("./assets/yolov8m.onnx", true);
+            Assert.NotNull(yolo);
+
+            using var image = Image.FromFile("Assets/input.jpg");
+            var predictions = yolo.Predict(image);
+
+            Assert.NotNull(predictions);
+
+            DrawBoxes(yolo.ModelInputHeight, yolo.ModelInputWidth, image, predictions);
+
+            image.Save("result.jpg");
         }
 
         private void DrawBoxes(int modelInputHeight, int modelInputWidth, Image image, List<Prediction> predictions)
@@ -55,15 +72,15 @@ namespace Yolov8net.test
                 // Bounding Box Text
                 string text = $"{pred.Label.Name} [{pred.Score}]";
 
-                using (Graphics thumbnailGraphic = Graphics.FromImage(image))
+                using (Graphics graphics = Graphics.FromImage(image))
                 {
-                    thumbnailGraphic.CompositingQuality = CompositingQuality.HighQuality;
-                    thumbnailGraphic.SmoothingMode = SmoothingMode.HighQuality;
-                    thumbnailGraphic.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    graphics.CompositingQuality = CompositingQuality.HighQuality;
+                    graphics.SmoothingMode = SmoothingMode.HighQuality;
+                    graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
                     // Define Text Options
-                    Font drawFont = new Font("Courier", 12, FontStyle.Regular);
-                    SizeF size = thumbnailGraphic.MeasureString(text, drawFont);
+                    Font drawFont = new Font("consolas", 11, FontStyle.Regular);
+                    SizeF size = graphics.MeasureString(text, drawFont);
                     SolidBrush fontBrush = new SolidBrush(Color.Black);
                     Point atPoint = new Point((int)x, (int)y - (int)size.Height - 1);
 
@@ -72,11 +89,11 @@ namespace Yolov8net.test
                     SolidBrush colorBrush = new SolidBrush(Color.Yellow);
 
                     // Draw text on image 
-                    thumbnailGraphic.FillRectangle(colorBrush, (int)x, (int)(y - size.Height - 1), (int)size.Width, (int)size.Height);
-                    thumbnailGraphic.DrawString(text, drawFont, fontBrush, atPoint);
+                    graphics.FillRectangle(colorBrush, (int)x, (int)(y - size.Height - 1), (int)size.Width, (int)size.Height);
+                    graphics.DrawString(text, drawFont, fontBrush, atPoint);
 
                     // Draw bounding box on image
-                    thumbnailGraphic.DrawRectangle(pen, x, y, width, height);
+                    graphics.DrawRectangle(pen, x, y, width, height);
                 }
             }
         }

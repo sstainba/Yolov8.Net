@@ -17,15 +17,10 @@ namespace Yolov8net
         {
 
             if (useCuda)
-            {
-                SessionOptions opts = SessionOptions.MakeSessionOptionWithCudaProvider();
-                _inferenceSession = new InferenceSession(ModelPath, opts);
-            }
+                _inferenceSession = new InferenceSession(ModelPath,
+                    SessionOptions.MakeSessionOptionWithCudaProvider());
             else
-            {
-                SessionOptions opts = new();
-                _inferenceSession = new InferenceSession(ModelPath, opts);
-            }
+                _inferenceSession = new InferenceSession(ModelPath);
 
 
             /// Get model info
@@ -79,7 +74,8 @@ namespace Yolov8net
             Parallel.For(0, output.Dimensions[0], i =>
             {
                 //divide total length by the elements per prediction
-                Parallel.For(0, (int)(output.Length / output.Dimensions[1]), j => {
+                Parallel.For(0, (int)(output.Length / output.Dimensions[1]), j =>
+                {
 
                     float xMin = ((output[i, 0, j] - output[i, 2, j] / 2) - xPad) / gain; // unpad bbox tlx to original
                     float yMin = ((output[i, 1, j] - output[i, 3, j] / 2) - yPad) / gain; // unpad bbox tly to original
@@ -105,7 +101,7 @@ namespace Yolov8net
                     });
 
                 });
-                
+
             });
 
             return result.ToList();

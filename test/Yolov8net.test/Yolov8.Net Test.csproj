@@ -36,7 +36,7 @@
     <None Update="Assets\bobbers_v9_yolov8.onnx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Assets\rufus.jpg">
+    <None Update="Assets\input.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Assets\yolov8m.onnx">
