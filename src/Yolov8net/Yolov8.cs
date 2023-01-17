@@ -42,6 +42,10 @@ namespace Yolov8net
         public string? InputColumnName { get; private set; }
         public string? OutputColumnName { get; private set; }
 
+        public int ModelInputHeight => _model?.Height ?? 0;
+        public int ModelInputWidth => _model?.Width ?? 0;
+        public int ModelInputDepth => _model?.Depth ?? 0;
+
         public List<Prediction> Predict(Image image)
         {
             return Suppress(ParseDetect(Inference(image)[0], image));
@@ -76,11 +80,6 @@ namespace Yolov8net
             {
                 //divide total length by the elements per prediction
                 Parallel.For(0, (int)(output.Length / output.Dimensions[1]), j => {
-
-                    //var xMin = (output[i, 0, j] - xPad) / gain;
-                    //var yMin = (output[i, 1, j] - yPad) / gain;
-                    //var xMax = (output[i, 2, j] - xPad) / gain;
-                    //var yMax = (output[i, 3, j] - yPad) / gain;
 
                     float xMin = ((output[i, 0, j] - output[i, 2, j] / 2) - xPad) / gain; // unpad bbox tlx to original
                     float yMin = ((output[i, 1, j] - output[i, 3, j] / 2) - yPad) / gain; // unpad bbox tly to original

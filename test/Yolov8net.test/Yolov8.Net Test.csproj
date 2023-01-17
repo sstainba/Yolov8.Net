@@ -34,13 +34,13 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Assets\bobbers_v9_yolov8.onnx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Assets\bobbers_v9_yolov8_opset_12.onnx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Update="Assets\rufus.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Assets\bobbers_v9_yolov8_opset_16.onnx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Update="Assets\yolov8m.onnx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
