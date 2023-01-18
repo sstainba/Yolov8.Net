@@ -34,7 +34,7 @@ namespace Yolov8net
             else UseDefaultLabels();
 
             //if there are more labels than we have outputs for, throw an exception
-            if (labels.Length + 4 > _model.Dimensions) throw new ArgumentOutOfRangeException("Number of labels provided exceeds output dimensions of model.");
+            if (_model.Labels?.Count + 4 > _model.Dimensions) throw new ArgumentOutOfRangeException("Number of labels provided exceeds output dimensions of model.");
 
         }
 

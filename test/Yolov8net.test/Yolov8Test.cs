@@ -9,6 +9,14 @@ namespace Yolov8net.test
         [Fact]
         public void WowBobberTest()
         {
+            string outputPath = Path.Combine(Directory.GetCurrentDirectory(), "output_WowBobberTest");
+            if (Directory.Exists(outputPath))
+            {
+                Directory.Delete(outputPath, true);
+            }
+            Directory.CreateDirectory(outputPath);
+
+
             using var yolo = new Yolov8("./assets/bobbers_v9_yolov8.onnx", false, new string[] { "bobber" });
             Assert.NotNull(yolo);
 
@@ -24,13 +32,50 @@ namespace Yolov8net.test
 
                 DrawBoxes(yolo.ModelInputHeight, yolo.ModelInputWidth, image, predictions);
 
-                image.Save($"{fileName}-out.jpg");
+                image.Save(Path.Combine(outputPath, $"{fileName}.jpg"));
+            }
+        }
+
+        [Fact]
+        public void WowBobberLableMismatchTest() {
+
+            string outputPath = Path.Combine(Directory.GetCurrentDirectory(), "output_WowBobberLableMismatchTest");
+            if (Directory.Exists(outputPath))
+            {
+                Directory.Delete(outputPath, true);
+            }
+            Directory.CreateDirectory(outputPath);
+
+
+            using var yolo = new Yolov8("./assets/bobbers_v9_yolov8.onnx");
+            Assert.NotNull(yolo);
+
+            var inputFiles = Directory.GetFiles("./assets/", "bob*.jpg");
+
+            foreach (var inputFile in inputFiles)
+            {
+                var fileName = Path.GetFileNameWithoutExtension(inputFile);
+                using var image = Image.FromFile(inputFile);
+                var predictions = yolo.Predict(image);
+
+                Assert.NotNull(predictions);
+
+                DrawBoxes(yolo.ModelInputHeight, yolo.ModelInputWidth, image, predictions);
+
+                image.Save(Path.Combine(outputPath, $"{fileName}.jpg"));
             }
         }
 
         [Fact]
         public void CocoTest()
         {
+            string outputPath = Path.Combine(Directory.GetCurrentDirectory(), "output_CocoTest");
+            if (Directory.Exists(outputPath))
+            {
+                Directory.Delete(outputPath, true);
+            }
+            Directory.CreateDirectory(outputPath);
+
             using var yolo = new Yolov8("./assets/yolov8m.onnx");
             Assert.NotNull(yolo);
 
@@ -41,7 +86,7 @@ namespace Yolov8net.test
 
             DrawBoxes(yolo.ModelInputHeight, yolo.ModelInputWidth, image, predictions);
 
-            image.Save("result.jpg");
+            image.Save(Path.Combine(outputPath, "result.jpg"));
         }
 
         [Fact]
