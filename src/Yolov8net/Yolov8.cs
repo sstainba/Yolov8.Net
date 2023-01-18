@@ -32,6 +32,10 @@ namespace Yolov8net
                 UseCustomLabels(labels);
             }
             else UseDefaultLabels();
+
+            //if there are more labels than we have outputs for, throw an exception
+            if (labels.Length + 4 > _model.Dimensions) throw new ArgumentOutOfRangeException("Number of labels provided exceeds output dimensions of model.");
+
         }
 
         public string? InputColumnName { get; private set; }
@@ -87,7 +91,7 @@ namespace Yolov8net
                     xMax = Utils.Clamp(xMax, 0, w - 1); // clip bbox brx to boundaries
                     yMax = Utils.Clamp(yMax, 0, h - 1); // clip bbox bry to boundaries
 
-                    Parallel.For(0, _model.Labels.Count, l =>
+                    Parallel.For(0, _model.Dimensions - 4, l =>
                     {
                         var pred = output[i, 4 + l, j];
 
