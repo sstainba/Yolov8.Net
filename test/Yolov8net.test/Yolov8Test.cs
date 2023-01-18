@@ -12,15 +12,20 @@ namespace Yolov8net.test
             using var yolo = new Yolov8("./assets/bobbers_v9_yolov8.onnx", false, new string[] { "bobber" });
             Assert.NotNull(yolo);
 
-            using var image = Image.FromFile("Assets/bobber1.jpg");
-            var predictions = yolo.Predict(image);
+            var inputFiles = Directory.GetFiles("./assets/", "bob*.jpg");
 
-            Assert.NotNull(predictions);
-            Assert.True(predictions.Count == 1);
+            foreach (var inputFile in inputFiles)
+            {
+                var fileName = Path.GetFileNameWithoutExtension(inputFile);
+                using var image = Image.FromFile(inputFile);
+                var predictions = yolo.Predict(image);
 
-            DrawBoxes(yolo.ModelInputHeight, yolo.ModelInputWidth, image, predictions);
+                Assert.NotNull(predictions);
 
-            image.Save("bobber1-out.jpg");
+                DrawBoxes(yolo.ModelInputHeight, yolo.ModelInputWidth, image, predictions);
+
+                image.Save($"{fileName}-out.jpg");
+            }
         }
 
         [Fact]
