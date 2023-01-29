@@ -1,8 +1,7 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using static System.Formats.Asn1.AsnWriter;
 
-namespace Yolov8net.test
+namespace Yolonet.test
 {
     public class Yolov8Test
     {
@@ -17,7 +16,7 @@ namespace Yolov8net.test
             Directory.CreateDirectory(outputPath);
 
 
-            using var yolo = new Yolov8("./assets/bobbers_v9_yolov8.onnx", false, new string[] { "bobber" });
+            using var yolo = YoloV8Predictor.Create("./assets/bobbers_v9_yolov8.onnx", new string[] { "bobber" });
             Assert.NotNull(yolo);
 
             var inputFiles = Directory.GetFiles("./assets/", "bob*.jpg");
@@ -37,7 +36,8 @@ namespace Yolov8net.test
         }
 
         [Fact]
-        public void WowBobberLableMismatchTest() {
+        public void WowBobberLableMismatchTest()
+        {
 
             string outputPath = Path.Combine(Directory.GetCurrentDirectory(), "output_WowBobberLableMismatchTest");
             if (Directory.Exists(outputPath))
@@ -47,7 +47,7 @@ namespace Yolov8net.test
             Directory.CreateDirectory(outputPath);
 
 
-            using var yolo = new Yolov8("./assets/bobbers_v9_yolov8.onnx");
+            using var yolo = YoloV8Predictor.Create("./assets/bobbers_v9_yolov8.onnx");
             Assert.NotNull(yolo);
 
             var inputFiles = Directory.GetFiles("./assets/", "bob*.jpg");
@@ -76,7 +76,7 @@ namespace Yolov8net.test
             }
             Directory.CreateDirectory(outputPath);
 
-            using var yolo = new Yolov8("./assets/yolov8m.onnx");
+            using var yolo = YoloV8Predictor.Create("./assets/yolov8m.onnx");
             Assert.NotNull(yolo);
 
             using var image = Image.FromFile("Assets/input.jpg");
@@ -92,7 +92,7 @@ namespace Yolov8net.test
         [Fact]
         public void CocoTest_CUDA()
         {
-            using var yolo = new Yolov8("./assets/yolov8m.onnx", true);
+            using var yolo = YoloV8Predictor.Create("./assets/yolov8m.onnx", null, true);
             Assert.NotNull(yolo);
 
             using var image = Image.FromFile("Assets/input.jpg");
@@ -105,7 +105,7 @@ namespace Yolov8net.test
             image.Save("result.jpg");
         }
 
-        private void DrawBoxes(int modelInputHeight, int modelInputWidth, Image image, List<Prediction> predictions)
+        private void DrawBoxes(int modelInputHeight, int modelInputWidth, Image image, Prediction[] predictions)
         {
             foreach (var pred in predictions)
             {

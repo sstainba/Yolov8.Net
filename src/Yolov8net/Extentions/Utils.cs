@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 
-namespace Yolov8net.Extentions
+namespace Yolonet.Extentions
 {
     public static class Utils
     {
@@ -79,6 +79,11 @@ namespace Yolov8net.Extentions
         public static float Clamp(float value, float min, float max)
         {
             return (value < min) ? min : (value > max) ? max : value;
+        }
+
+        public static float Sigmoid(float value)
+        {
+            return 1 / (1 + (float)Math.Exp(-value));
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿
-namespace Yolov8net
+namespace Yolonet
 {
     public enum LabelKind
     {
