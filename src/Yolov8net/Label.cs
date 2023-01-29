@@ -1,11 +1,9 @@
-﻿using System.Drawing;
-
-namespace Yolov8net
+﻿namespace Yolonet
 {
     public class Label
     {
-        public int Id { get; set; }
-        public string? Name { get; set; }
-        public LabelKind Kind { get; set; }
+        public int Id { get; init; }
+        public string? Name { get; init; }
+        public LabelKind Kind { get; init; } = LabelKind.Generic;
     }
 }
