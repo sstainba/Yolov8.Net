@@ -13,10 +13,10 @@ namespace Yolonet
         protected Label[] Labels { get; set; } = new Label[] { };
 
 
-        public float Confidence { get; private set; } = 0.20f;
-        public float MulConfidence { get; private set; } = 0.25f;
-        public float Overlap { get; private set; } = 0.45f;
-        public int ModelOutputDimensions { get; private set; }
+        public float Confidence { get; protected set; } = 0.20f;
+        public float MulConfidence { get; protected set; } = 0.25f;
+        public float Overlap { get; protected set; } = 0.45f;
+        public int ModelOutputDimensions { get; protected set; }
 
         public bool UseDetect { get; set; }
 
@@ -44,11 +44,11 @@ namespace Yolonet
             if (Labels?.Length + 4 > ModelOutputDimensions) throw new ArgumentOutOfRangeException("Number of labels provided exceeds output dimensions of model.");
         }
 
-        public string? InputColumnName { get; private set; }
-        public string? OutputColumnName { get; private set; }
+        public string? InputColumnName { get; protected set; }
+        public string? OutputColumnName { get; protected set; }
 
-        public int ModelInputHeight { get; private set; }
-        public int ModelInputWidth { get; private set; }
+        public int ModelInputHeight { get; protected set; }
+        public int ModelInputWidth { get; protected set; }
 
         public void Dispose()
         {
@@ -101,11 +101,6 @@ namespace Yolonet
             return result.ToArray();
         }
 
-        virtual protected List<Prediction> ParseOutput(DenseTensor<float> output, Image image)
-        {
-            throw new NotImplementedException();
-        }
-
         protected void UseCustomLabels(string[] labels)
         {
             Labels = labels.Select((s, i) => new { i, s }).ToList()
@@ -154,10 +149,7 @@ namespace Yolonet
 
         public virtual Prediction[] Predict(Image image)
         {
-            return Suppress(
-                ParseOutput(
-                    Inference(image)[0], image)
-                );
+            throw new NotImplementedException();
         }
     }
 }

@@ -27,6 +27,14 @@ namespace Yolonet
 
         public int[] Shapes { get; set; } = new int[] { 80, 40, 20 };
 
+        override protected void GetOutputDetails()
+        {
+            OutputColumnName = _inferenceSession.OutputMetadata.Keys.First();
+            modelOutputs = _inferenceSession.OutputMetadata.Keys.ToArray();
+            ModelOutputDimensions = _inferenceSession.OutputMetadata[modelOutputs[0]].Dimensions[2];
+            UseDetect = !(modelOutputs.Any(x => x == "score"));
+        }
+
         private List<Prediction> ParseDetect(DenseTensor<float> output, Image image)
         {
             var result = new ConcurrentBag<Prediction>();
@@ -149,7 +157,7 @@ namespace Yolonet
         {
             return Suppress(
              ParseOutput(
-                 Inference(image)[0], image)
+                 Inference(image), image)
              );
         }
 

@@ -17,7 +17,7 @@ namespace Yolonet
         private YoloV8Predictor(string modelPath, string[]? labels = null, bool useCuda = false)
             : base(modelPath, labels, useCuda) { }
 
-        protected override List<Prediction> ParseOutput(DenseTensor<float> output, Image image)
+        protected List<Prediction> ParseOutput(DenseTensor<float> output, Image image)
         {
             var result = new ConcurrentBag<Prediction>();
 
@@ -62,6 +62,14 @@ namespace Yolonet
             });
 
             return result.ToList();
+        }
+
+        override public Prediction[] Predict(Image image)
+        {
+            return Suppress(
+                ParseOutput(
+                    Inference(image)[0], image)
+                );
         }
     }
 }
