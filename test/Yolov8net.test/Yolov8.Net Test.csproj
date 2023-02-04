@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Yolov8net\Yolo.Net.csproj" />
+    <ProjectReference Include="..\..\src\Yolov8net\Yolov8.Net.csproj" />
   </ItemGroup>
 
   <ItemGroup>
