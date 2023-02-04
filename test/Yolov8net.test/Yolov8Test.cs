@@ -46,24 +46,12 @@ namespace Yolonet.test
             }
             Directory.CreateDirectory(outputPath);
 
+            IPredictor yolo = null;
 
-            using var yolo = YoloV8Predictor.Create("./assets/bobbers_v9_yolov8.onnx");
-            Assert.NotNull(yolo);
-
-            var inputFiles = Directory.GetFiles("./assets/", "bob*.jpg");
-
-            foreach (var inputFile in inputFiles)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
-                var fileName = Path.GetFileNameWithoutExtension(inputFile);
-                using var image = Image.FromFile(inputFile);
-                var predictions = yolo.Predict(image);
-
-                Assert.NotNull(predictions);
-
-                DrawBoxes(yolo.ModelInputHeight, yolo.ModelInputWidth, image, predictions);
-
-                image.Save(Path.Combine(outputPath, $"{fileName}.jpg"));
-            }
+                yolo = YoloV8Predictor.Create("./assets/bobbers_v9_yolov8.onnx");
+            });
         }
 
         [Fact]
@@ -92,6 +80,9 @@ namespace Yolonet.test
         [Fact]
         public void CocoTest_CUDA()
         {
+            // NOTE:  Must have CUDA Dev pack installed
+
+
             using var yolo = YoloV8Predictor.Create("./assets/yolov8m.onnx", null, true);
             Assert.NotNull(yolo);
 

@@ -7,9 +7,13 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Authors>Samuel Stainback</Authors>
     <Version>1.0.0</Version>
-    <Description>Yolov8 ONNX interface for .NET 6</Description>
+    <Description>Yolov5 and Yolov8 ONNX interface for .NET 6</Description>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Title>Yolov8 ONNX Interface for .NET 6.0</Title>
+    <Title>Yolov5 and Yolov8 ONNX Interface for .NET 6.0</Title>
+    <PackageProjectUrl>https://github.com/sstainba/YoloNet</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/sstainba/YoloNet</RepositoryUrl>
+    <PackageTags>Yolo;Yolov5;Yolov8;ComputerVision;ML;ONNX</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -23,8 +27,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.ML.OnnxRuntime.Managed" Version="1.13.1" />
-    <PackageReference Include="MinVer" Version="4.2.0">
+    <PackageReference Include="MinVer" Version="4.3.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

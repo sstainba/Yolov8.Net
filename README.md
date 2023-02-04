@@ -1,10 +1,15 @@
-# Yolov8net
+# Yolo.Net
 
-This is a .NET interface for using Yolov8 models on the ONNX runtime.
+https://github.com/sstainba/YoloNet
+
+This is a .NET interface for using Yolov5 and Yolov8 models on the ONNX runtime.
+At the time this is published, the ONNX Runtime only supports up to Opset 15.
+If you are training a custom model, be sure to export the model to the ONNX format with
+the --Opset=15 flag.
 
 Usage:
 
-install-package Yolov8.Net
+install-package Yolo.Net
 
 ![](input.jpg)
 

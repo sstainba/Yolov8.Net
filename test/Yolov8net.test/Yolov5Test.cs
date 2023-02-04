@@ -38,7 +38,6 @@ namespace Yolonet.test
         [Fact]
         public void WowBobberLableMismatchTest()
         {
-
             string outputPath = Path.Combine(Directory.GetCurrentDirectory(), "output_WowBobberLableMismatchTest");
             if (Directory.Exists(outputPath))
             {
@@ -46,24 +45,12 @@ namespace Yolonet.test
             }
             Directory.CreateDirectory(outputPath);
 
+            IPredictor yolo = null;
 
-            using var yolo = YoloV5Predictor.Create("./assets/bobbers_v5_m.onnx");
-            Assert.NotNull(yolo);
-
-            var inputFiles = Directory.GetFiles("./assets/", "bob*.jpg");
-
-            foreach (var inputFile in inputFiles)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
-                var fileName = Path.GetFileNameWithoutExtension(inputFile);
-                using var image = Image.FromFile(inputFile);
-                var predictions = yolo.Predict(image);
-
-                Assert.NotNull(predictions);
-
-                DrawBoxes(yolo.ModelInputHeight, yolo.ModelInputWidth, image, predictions);
-
-                image.Save(Path.Combine(outputPath, $"{fileName}.jpg"));
-            }
+                yolo = YoloV5Predictor.Create("./assets/bobbers_v5_m.onnx");
+            });
         }
 
         private void DrawBoxes(int modelInputHeight, int modelInputWidth, Image image, Prediction[] predictions)
