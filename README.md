@@ -1,4 +1,4 @@
-# Yolo.Net
+# Yolov8.Net
 
 https://github.com/sstainba/Yolov8.Net
 
