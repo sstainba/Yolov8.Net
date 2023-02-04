@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yolo.Net", "src\Yolov8net\Yolo.Net.csproj", "{7864954C-DB16-4C4F-9DEA-6C8BBF3F1163}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yolov8.Net", "src\Yolov8net\Yolov8.Net.csproj", "{7864954C-DB16-4C4F-9DEA-6C8BBF3F1163}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yolo.Net Test", "test\Yolov8net.test\Yolo.Net Test.csproj", "{A3A4B630-0D0F-4BA2-9AEC-EDA2651DD8DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yolov8.Net Test", "test\Yolov8net.test\Yolov8.Net Test.csproj", "{A3A4B630-0D0F-4BA2-9AEC-EDA2651DD8DD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{91C281D8-6E91-4FCB-9D7C-01CB08FA8D4E}"
 	ProjectSection(SolutionItems) = preProject

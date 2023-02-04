@@ -1,4 +1,4 @@
-﻿namespace Yolonet
+﻿namespace Yolov8Net
 {
     public class Label
     {

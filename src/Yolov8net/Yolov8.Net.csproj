@@ -10,9 +10,9 @@
     <Description>Yolov5 and Yolov8 ONNX interface for .NET 6</Description>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>Yolov5 and Yolov8 ONNX Interface for .NET 6.0</Title>
-    <PackageProjectUrl>https://github.com/sstainba/YoloNet</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/sstainba/Yolov8.Net</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/sstainba/YoloNet</RepositoryUrl>
+    <RepositoryUrl>https://github.com/sstainba/Yolov8.Net</RepositoryUrl>
     <PackageTags>Yolo;Yolov5;Yolov8;ComputerVision;ML;ONNX</PackageTags>
   </PropertyGroup>
 

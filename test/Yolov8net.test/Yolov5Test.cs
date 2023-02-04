@@ -1,7 +1,7 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
-namespace Yolonet.test
+namespace Yolov8Net.test
 {
     public class Yolov5Test
     {

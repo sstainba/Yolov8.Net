@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Yolonet
+namespace Yolov8Net
 {
     public class Prediction
     {

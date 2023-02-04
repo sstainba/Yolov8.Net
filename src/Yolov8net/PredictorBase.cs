@@ -1,9 +1,9 @@
 ﻿using Microsoft.ML.OnnxRuntime;
 using Microsoft.ML.OnnxRuntime.Tensors;
 using System.Drawing;
-using Yolonet.Extentions;
+using Yolov8Net.Extentions;
 
-namespace Yolonet
+namespace Yolov8Net
 {
     abstract public class PredictorBase
         : IPredictor

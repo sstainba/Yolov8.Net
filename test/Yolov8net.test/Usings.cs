@@ -1,2 +1,2 @@
 global using Xunit;
-global using Yolonet;
+global using Yolov8Net;
