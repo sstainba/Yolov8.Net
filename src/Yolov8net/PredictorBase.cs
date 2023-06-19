@@ -1,6 +1,6 @@
 ﻿using Microsoft.ML.OnnxRuntime;
 using Microsoft.ML.OnnxRuntime.Tensors;
-using System.Drawing;
+using SixLabors.ImageSharp;
 using Yolov8Net.Extentions;
 
 namespace Yolov8Net
@@ -119,7 +119,7 @@ namespace Yolov8Net
 
         protected virtual DenseTensor<float>[] Inference(Image img)
         {
-            Bitmap resized = null;
+            Image resized = null;
 
             if (img.Width != ModelInputWidth || img.Height != ModelInputHeight)
             {
@@ -127,7 +127,7 @@ namespace Yolov8Net
             }
             else
             {
-                resized = new Bitmap(img);
+                resized = img;
             }
 
             var inputs = new List<NamedOnnxValue> // add image as onnx input

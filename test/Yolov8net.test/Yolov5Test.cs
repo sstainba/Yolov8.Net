@@ -1,10 +1,20 @@
-using System.Drawing;
-using System.Drawing.Drawing2D;
+using SixLabors.Fonts;
+using SixLabors.ImageSharp.Drawing.Processing;
+
 
 namespace Yolov8Net.test
 {
     public class Yolov5Test
     {
+        private readonly Font font;
+
+        public Yolov5Test()
+        {
+            var fontCollection = new FontCollection();
+            var fontFamily = fontCollection.Add("assets/CONSOLA.TTF");
+            font = fontFamily.CreateFont(11);
+        }
+
         [Fact]
         public void WowBobberTest()
         {
@@ -24,7 +34,7 @@ namespace Yolov8Net.test
             foreach (var inputFile in inputFiles)
             {
                 var fileName = Path.GetFileNameWithoutExtension(inputFile);
-                using var image = Image.FromFile(inputFile);
+                using var image = Image.Load(inputFile);
                 var predictions = yolo.Predict(image);
 
                 Assert.NotNull(predictions);
@@ -60,39 +70,27 @@ namespace Yolov8Net.test
                 var originalImageHeight = image.Height;
                 var originalImageWidth = image.Width;
 
-                var x = Math.Max(pred.Rectangle.X, 0);
-                var y = Math.Max(pred.Rectangle.Y, 0);
-                var width = Math.Min(originalImageWidth - x, pred.Rectangle.Width);
-                var height = Math.Min(originalImageHeight - y, pred.Rectangle.Height);
+                var x = (int)Math.Max(pred.Rectangle.X, 0);
+                var y = (int)Math.Max(pred.Rectangle.Y, 0);
+                var width = (int)Math.Min(originalImageWidth - x, pred.Rectangle.Width);
+                var height = (int)Math.Min(originalImageHeight - y, pred.Rectangle.Height);
 
                 //Note that the output is already scaled to the original image height and width.
 
                 // Bounding Box Text
                 string text = $"{pred.Label.Name} [{pred.Score}]";
+                var size = TextMeasurer.Measure(text, new TextOptions(font));
 
-                using (Graphics graphics = Graphics.FromImage(image))
-                {
-                    graphics.CompositingQuality = CompositingQuality.HighQuality;
-                    graphics.SmoothingMode = SmoothingMode.HighQuality;
-                    graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                image.Mutate(d => d.Draw(Pens.Solid(Color.Yellow, 2),
+                    new Rectangle(x, y, width, height)));
 
-                    // Define Text Options
-                    Font drawFont = new Font("consolas", 11, FontStyle.Regular);
-                    SizeF size = graphics.MeasureString(text, drawFont);
-                    SolidBrush fontBrush = new SolidBrush(Color.Black);
-                    Point atPoint = new Point((int)x, (int)y - (int)size.Height - 1);
 
-                    // Define BoundingBox options
-                    Pen pen = new Pen(Color.Yellow, 2.0f);
-                    SolidBrush colorBrush = new SolidBrush(Color.Yellow);
-
-                    // Draw text on image 
-                    graphics.FillRectangle(colorBrush, (int)x, (int)(y - size.Height - 1), (int)size.Width, (int)size.Height);
-                    graphics.DrawString(text, drawFont, fontBrush, atPoint);
-
-                    // Draw bounding box on image
-                    graphics.DrawRectangle(pen, x, y, width, height);
-                }
+                image.Mutate(d => d.DrawText(
+                    new TextOptions(font)
+                    {
+                        Origin = new Point(x, (int)(y - size.Height - 1))
+                    },
+                    text, Color.Yellow)); ;
             }
         }
     }
