@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace Yolov8Net
+﻿namespace Yolov8Net
 {
     public class Prediction
     {

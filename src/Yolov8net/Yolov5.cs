@@ -1,6 +1,5 @@
 ﻿using Microsoft.ML.OnnxRuntime.Tensors;
 using System.Collections.Concurrent;
-using System.Drawing;
 using Yolov8Net.Extentions;
 
 namespace Yolov8Net
@@ -8,6 +7,13 @@ namespace Yolov8Net
     public class YoloV5Predictor
         : PredictorBase, IPredictor
     {
+        /// <summary>
+        /// Create a YoloV5 Predictor.
+        /// </summary>
+        /// <param name="modelPath">Path to the ONNX format model to load.</param>
+        /// <param name="labels">Labels associated with model. If not provided, standard COCO labels are used.</param>
+        /// <param name="useCuda">Use GPU/CUDA.  NOTE: Requires CUDA drivers AND CUDNN be installed.</param>
+        /// <returns>IPredictor</returns>
         public static IPredictor Create(string modelPath, string[]? labels = null, bool useCuda = false)
         {
             return new YoloV5Predictor(modelPath, labels, useCuda);
