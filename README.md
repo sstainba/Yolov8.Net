@@ -7,6 +7,10 @@ At the time this is published, the ONNX Runtime only supports up to Opset 15.
 If you are training a custom model, be sure to export the model to the ONNX format with
 the --Opset=15 flag.
 
+NOTE:  If you want to use the GPU, you must have BOTH the CUDA drivers AND CUDNN installed!!!!!!
+       Loading the model is time consuming, so initial predictions will be slow.  Subsequent
+       predictions will be significantly faster.
+
 ![](input.jpg)
 
 ```csharp
