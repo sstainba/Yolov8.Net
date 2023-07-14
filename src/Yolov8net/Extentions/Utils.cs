@@ -1,5 +1,6 @@
 ﻿using Microsoft.ML.OnnxRuntime.Tensors;
 using SixLabors.ImageSharp.Advanced;
+using System.Diagnostics;
 
 namespace Yolov8Net.Extentions
 {
@@ -19,8 +20,7 @@ namespace Yolov8Net.Extentions
 
         public static Image ResizeImage(Image image,int target_width,int target_height)
         {
-            image.Mutate(x => x.Resize(target_width,target_height));
-            return image;
+            return image.Clone(x => x.Resize(target_width,target_height));
         }
 
         public static Tensor<float> ExtractPixels(Image image)
