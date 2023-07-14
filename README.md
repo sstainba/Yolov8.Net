@@ -8,6 +8,7 @@ If you are training a custom model, be sure to export the model to the ONNX form
 the --Opset=15 flag.
 
 NOTE:  If you want to use the GPU, you must have BOTH the CUDA drivers AND CUDNN installed!!!!!!
+       Please use v11.x of the CUDNN as the 12.x versions are not yet supported.
        Loading the model is time consuming, so initial predictions will be slow.  Subsequent
        predictions will be significantly faster.
 
