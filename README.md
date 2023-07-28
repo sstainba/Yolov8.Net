@@ -17,7 +17,7 @@ NOTE:  If you want to use the GPU, you must have BOTH the CUDA drivers AND CUDNN
 ```csharp
 // Create new Yolov8 predictor, specifying the model (in ONNX format)
 // If you are using a custom trained model, you can provide an array of labels. Otherwise, the standard Coco labels are used.
-using var yolo = new YoloV8Predictor.Create("./assets/yolov8m.onnx");
+using var yolo = YoloV8Predictor.Create("./assets/yolov8m.onnx");
 
 // Provide an input image.  Image will be resized to model input if needed.
 using var image = Image.FromFile("Assets/rufus.jpg");
