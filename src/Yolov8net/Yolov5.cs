@@ -47,9 +47,7 @@ namespace Yolov8Net
 
             var (w, h) = (image.Width, image.Height); // image w and h
             var (xGain, yGain) = (ModelInputWidth / (float)w, ModelInputHeight / (float)h); // x, y gains
-            var gain = Math.Min(xGain, yGain); // gain = resized / original
-
-            var (xPad, yPad) = ((ModelInputWidth - w * gain) / 2, (ModelInputHeight - h * gain) / 2); // left, right pads
+            var (xPad, yPad) = ((ModelInputWidth - w * xGain) / 2, (ModelInputHeight - h * yGain) / 2); // left, right pads
 
             Parallel.For(0, (int)output.Length / ModelOutputDimensions, (i) =>
             {
@@ -64,10 +62,10 @@ namespace Yolov8Net
                 {
                     if (output[0, i, k] <= MulConfidence) return; // skip low mul_conf results
 
-                    float xMin = ((output[0, i, 0] - output[0, i, 2] / 2) - xPad) / gain; // unpad bbox tlx to original
-                    float yMin = ((output[0, i, 1] - output[0, i, 3] / 2) - yPad) / gain; // unpad bbox tly to original
-                    float xMax = ((output[0, i, 0] + output[0, i, 2] / 2) - xPad) / gain; // unpad bbox brx to original
-                    float yMax = ((output[0, i, 1] + output[0, i, 3] / 2) - yPad) / gain; // unpad bbox bry to original
+                    float xMin = ((output[0, i, 0] - output[0, i, 2] / 2) - xPad) / xGain; // unpad bbox tlx to original
+                    float yMin = ((output[0, i, 1] - output[0, i, 3] / 2) - yPad) / yGain; // unpad bbox tly to original
+                    float xMax = ((output[0, i, 0] + output[0, i, 2] / 2) - xPad) / xGain; // unpad bbox brx to original
+                    float yMax = ((output[0, i, 1] + output[0, i, 3] / 2) - yPad) / yGain; // unpad bbox bry to original
 
                     xMin = Utils.Clamp(xMin, 0, w - 0); // clip bbox tlx to boundaries
                     yMin = Utils.Clamp(yMin, 0, h - 0); // clip bbox tly to boundaries
