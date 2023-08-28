@@ -122,18 +122,13 @@ namespace Yolov8Net.test
 
                 // Bounding Box Text
                 string text = $"{pred.Label.Name} [{pred.Score}]";
-                var size = TextMeasurer.Measure(text, new TextOptions(font));
+                var size = TextMeasurer.MeasureSize(text, new TextOptions(font));
 
                 image.Mutate(d => d.Draw(Pens.Solid(Color.Yellow, 2),
                     new Rectangle(x, y, width, height)));
 
-
-                image.Mutate(d => d.DrawText(
-                    new TextOptions(font)
-                    {
-                        Origin = new Point(x, (int)(y - size.Height - 1))
-                    },
-                    text, Color.Yellow)); ;
+                image.Mutate(d => d.DrawText(text, font, Color.Yellow, new Point(x, (int)(y - size.Height - 1))));
+                    
             }
         }
     }
