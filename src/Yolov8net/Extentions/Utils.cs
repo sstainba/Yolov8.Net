@@ -1,5 +1,8 @@
 ﻿using Microsoft.ML.OnnxRuntime.Tensors;
+using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Advanced;
+using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
 using System.Diagnostics;
 
 namespace Yolov8Net.Extentions

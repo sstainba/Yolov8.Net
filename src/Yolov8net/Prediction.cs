@@ -1,4 +1,6 @@
-﻿namespace Yolov8Net
+﻿using SixLabors.ImageSharp;
+
+namespace Yolov8Net
 {
     public class Prediction
     {

@@ -23,7 +23,6 @@ namespace Yolov8Net
 
         protected PredictorBase(string modelPath, string[]? labels = null, bool useCuda = false)
         {
-
             if (useCuda)
                 _inferenceSession = new InferenceSession(modelPath,
                     SessionOptions.MakeSessionOptionWithCudaProvider());

@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Authors>Samuel Stainback</Authors>
     <Version>1.0.0</Version>
-    <Description>Yolov5 and Yolov8 ONNX interface for .NET 6</Description>
+    <Description>Yolov5 and Yolov8 ONNX interface for .NET 8</Description>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>Yolov5 and Yolov8 ONNX Interface for .NET 6.0</Title>
     <PackageProjectUrl>https://github.com/sstainba/Yolov8.Net</PackageProjectUrl>
@@ -40,13 +40,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.ML.OnnxRuntime.Gpu" Version="1.15.1" />
-    <PackageReference Include="Microsoft.ML.OnnxRuntime.Managed" Version="1.15.1" />
-    <PackageReference Include="MinVer" Version="5.0.0-alpha.1">
+    <PackageReference Include="Microsoft.ML.OnnxRuntime.Gpu" Version="1.19.2" />
+    <PackageReference Include="Microsoft.ML.OnnxRuntime.Managed" Version="1.19.2" />
+    <PackageReference Include="MinVer" Version="6.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="SixLabors.ImageSharp" Version="3.0.1" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.5" />
   </ItemGroup>
 
 </Project>
