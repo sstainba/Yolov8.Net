@@ -9,7 +9,7 @@
     <Version>1.0.0</Version>
     <Description>Yolov5 and Yolov8 ONNX interface for .NET 8</Description>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Title>Yolov5 and Yolov8 ONNX Interface for .NET 6.0</Title>
+    <Title>Yolov5 and Yolov8 ONNX Interface for .NET 8.0</Title>
     <PackageProjectUrl>https://github.com/sstainba/Yolov8.Net</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/sstainba/Yolov8.Net</RepositoryUrl>

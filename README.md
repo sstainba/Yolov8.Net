@@ -3,12 +3,9 @@
 https://github.com/sstainba/Yolov8.Net
 
 This is a .NET interface for using Yolov5 and Yolov8 models on the ONNX runtime.
-At the time this is published, the ONNX Runtime only supports up to Opset 15.
-If you are training a custom model, be sure to export the model to the ONNX format with
-the --Opset=15 flag.
 
 NOTE:  If you want to use the GPU, you must have BOTH the CUDA drivers AND CUDNN installed!!!!!!
-       Please use v11.x of the CUDNN as the 12.x versions are not yet supported.
+       This was tested with cuDNN 9.3 + CUDA 11.8
        Loading the model is time consuming, so initial predictions will be slow.  Subsequent
        predictions will be significantly faster.
 
